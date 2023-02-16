@@ -25,8 +25,8 @@ __DL__jQueryinterval = setInterval(function(){
         ***********************/
         
         __DL__ = {
-            dynamicCart: true,  // if cart is dynamic (meaning no refresh on cart add) set to true
-            debug: false, // if true, console messages will be displayed
+            dynamicCart: true,  // urun, sepete eklendiginde sayfa yenilenmiyorsa, bu kisim true olarak kalacak. yoksa false yapin.
+            debug: false, // true, yapilirsa console mesaji olarak da gorunur.
             cart: null,
             wishlist: null,
             removeCart: null
