@@ -312,16 +312,25 @@ __DL__jQueryinterval = setInterval(function(){
         {% if template contains 'product' %}  
             var ecommerce = {
                 'items': [{
-                    'item_id'        : {{product.id | json}},  
+                    'item_id'         : {{product.id | json}},  
                     'item_variant'    : {{product.selected_variant.title | json}},             
-                    'item_name'      : {{product.title | json}},
+                    'item_name'       : {{product.title | json}},
                     'price'           : {{product.price | money_without_currency | replace: ',', '.' | times: 1 | json}},
                     'item_brand'      : {{product.vendor | json}},
                     'item_category'   : {{product.type | json}},
                     'item_list_name'  : {{collection.title | json}},
                     'description'     : {{product.description | strip_newlines | strip_html | json}},
                     'imageURL'        : 'https:{{product.featured_image.src|img_url:'grande'}}', 
-                    'productURL'      : '{{product.url}}'
+                    'productURL'      : '{{product.url}}',
+					'productOptions'  : {
+                        {% for option in product.options_with_values %}
+                        {% for value in option.values %}
+                        {% if option.selected_value == value %}
+                        {{option.name | json}} : {{value | json}},
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                    }
                 }]
             };               
             dataLayer.push({
