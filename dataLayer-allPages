@@ -25,8 +25,8 @@ __DL__jQueryinterval = setInterval(function(){
         ***********************/
         
         __DL__ = {
-            dynamicCart: true,  // urun, sepete eklendiginde sayfa yenilenmiyorsa, bu kisim true olarak kalacak. yoksa false yapin.
-            debug: false, // true, yapilirsa console mesaji olarak da gorunur.
+            dynamicCart: true,  // if cart is dynamic (meaning no refresh on cart add) set to true
+            debug: false, // if true, console messages will be displayed
             cart: null,
             wishlist: null,
             removeCart: null
@@ -289,7 +289,7 @@ __DL__jQueryinterval = setInterval(function(){
                         'item_id'        : {{product.id | json}},                  
                         'item_variant'    : {{product.selected_variant.title | json}},             
                         'item_name'      : {{product.title | json}},
-                        'price'           : {{product.price | money_without_currency | replace: ',', '.' | divided_by: 1.0 | json}},
+                        'price'           : {{product.price | money_without_currency | replace: ',', '.' | times: 1 | json}},
                         'item_brand'      : {{product.vendor | json}},
                         'item_category'   : {{product.type | json}},
                         'item_list_name'  : {{collection.title | json}},
@@ -315,7 +315,7 @@ __DL__jQueryinterval = setInterval(function(){
                     'item_id'        : {{product.id | json}},  
                     'item_variant'    : {{product.selected_variant.title | json}},             
                     'item_name'      : {{product.title | json}},
-                    'price'           : {{product.price | money_without_currency | replace: ',', '.' | divided_by: 1.0 | json}},
+                    'price'           : {{product.price | money_without_currency | replace: ',', '.' | times: 1 | json}},
                     'item_brand'      : {{product.vendor | json}},
                     'item_category'   : {{product.type | json}},
                     'item_list_name'  : {{collection.title | json}},
@@ -348,7 +348,7 @@ __DL__jQueryinterval = setInterval(function(){
                     'item_id'        : {{line_item.product.id | json}},                  
                     'item_variant'    : {{line_item.variant.title | json}},             
                     'item_name'      : {{line_item.product.title | json}},
-                    'price'           : {{line_item.product.price | money_without_currency | replace: ',', '.' | divided_by: 1.0 | json}},
+                    'price'           : {{line_item.product.price | money_without_currency | replace: ',', '.' | times: 1 | json}},
                     'item_brand'      : {{line_item.product.vendor | json}},
                     'item_category'   : {{line_item.product.type | json}},
                     'item_list_name'  : {{line_item.collection.title | json}},
@@ -368,10 +368,10 @@ __DL__jQueryinterval = setInterval(function(){
             var ecommerce = {
                 'transaction_id': '{{checkout.order_number  | json}}',
                 'affiliation': {{shop.name | json}},
-                'value': {{checkout.total_price | money_without_currency | replace: ',', '.' | divided_by: 1.0 | json}},
-                'tax': {{checkout.tax_price | money_without_currency | replace: ',','.' | json}},
-                'shipping': {{checkout.shipping_price | money_without_currency | replace: ',','.' | json}},
-                'subtotal': {{checkout.subtotal_price | money_without_currency| replace: ',','.' | json}},
+                'value': {{checkout.total_price | money_without_currency | replace: ',', '.' | times: 1 | json}},
+                'tax': {{checkout.tax_price | money_without_currency | replace: ',','.' | times: 1 | json}},
+                'shipping': {{checkout.shipping_price | money_without_currency | replace: ',','.' | times: 1 | json}},
+                'subtotal': {{checkout.subtotal_price | money_without_currency| replace: ',','.' | times: 1 | json}},
                 'currency': {{checkout.currency | json}},
                 {% for discount in checkout.discounts %}
                 'coupon': {{discount.code | json}},
@@ -382,7 +382,7 @@ __DL__jQueryinterval = setInterval(function(){
                     'item_id'        : {{line_item.product.id | json}},                  
                     'item_variant'    : {{line_item.variant.title | json}},             
                     'item_name'      : {{line_item.product.title | json}},
-                    'price'           : {{line_item.product.price | money_without_currency | replace: ',', '.' | divided_by: 1.0 | json}},
+                    'price'           : {{line_item.product.price | money_without_currency | replace: ',', '.' | times: 1 | json}},
                     'item_brand'      : {{line_item.product.vendor | json}},
                     'item_category'   : {{line_item.product.type | json}},
                     'item_list_name'  : {{line_item.collection.title | json}},
@@ -436,7 +436,7 @@ __DL__jQueryinterval = setInterval(function(){
                         'item_id'        : {{product.id | json}},                  
                         'item_variant'    : {{product.variant.title | json}},             
                         'item_name'      : {{product.title | json}},
-                        'price'           : {{product.price | money_without_currency | replace: ',', '.' | divided_by: 1.0 | json}},
+                        'price'           : {{product.price | money_without_currency | replace: ',', '.' | times: 1 | json}},
                         'item_brand'      : {{product.vendor | json}},
                         'item_category'   : {{product.type | json}},
                         'item_list_name'  : {{product.collection.title | json}},
@@ -458,7 +458,7 @@ __DL__jQueryinterval = setInterval(function(){
                         'item_id'        : {{line_item.product.id | json}},                  
                         'item_variant'    : {{line_item.variant.title | json}},             
                         'item_name'      : {{line_item.product.title | json}},
-                        'price'           : {{line_item.product.price | money_without_currency | replace: ',', '.' | divided_by: 1.0 | json}},
+                        'price'           : {{line_item.product.price | money_without_currency | replace: ',', '.' | times: 1 | json}},
                         'item_brand'      : {{line_item.product.vendor | json}},
                         'item_category'   : {{line_item.product.type | json}},
                         'item_list_name'  : {{line_item.collection.title | json}},
